@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 const bacdropVarients = {
@@ -18,7 +18,12 @@ const modal = {
     transition: { delay: 0.5 },
   },
 };
-const Modal = ({ showModal }) => {
+const Modal = ({ showModal, setShowModal }) => {
+  const history = useHistory();
+  const handleclick = () => {
+    // history.push("/");
+    setShowModal(false);
+  };
   return (
     <AnimatePresence exitBeforeEnter>
       {showModal && (
@@ -31,9 +36,8 @@ const Modal = ({ showModal }) => {
         >
           <motion.div className="modal" variants={modal}>
             <p>Wants to make another Pizza</p>
-            <Link to="/">
-              <button>Start again</button>
-            </Link>
+
+            <button onClick={handleclick}>Start again</button>
           </motion.div>
         </motion.div>
       )}
